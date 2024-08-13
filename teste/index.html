@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <form method="POST" class="formLogin" onsubmit="return validar();">
+            <img src="caminho/para/sua/imagem/Logo_Menu_Escolar_GPF.png" alt="Logo" />
+            <h1>Login</h1>
+            <p>Coloque seus dados para acessar.</p>
+            <label for="CPF">CPF</label>
+            <input type="text" id="CPF" placeholder="Digite seu CPF" autofocus="true" required />
+            <label for="password">Senha</label>
+            <input type="password" id="senha" placeholder="Digite sua senha" required />
+            <input type="submit" value="Acessar" class="btn" />
+            <p id="error-message" style="color: red; display: none;"></p>
+        </form>
+    </div>
+    <div class="nav">
+        <a href="segunda.html">Consulta</a>
+    </div>
+    <script>
+        function validar() {
+            const CPF = document.getElementById("CPF").value;
+            const senha = document.getElementById("senha").value;
+            const errorMessage = document.getElementById("error-message");
+            errorMessage.style.display = 'none'; // Esconde a mensagem de erro inicialmente
+
+            // Validações
+            if (!/^\d{9}$/.test(CPF)) {
+                errorMessage.textContent = 'O CPF deve conter 9 números.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            if (!/^\d{8}$/.test(senha)) {
+                errorMessage.textContent = 'A senha deve conter 8 números.';
+                errorMessage.style.display = 'block';
+                return false;
+            }
+
+            // Aqui você pode colocar as credenciais reais para validação
+            if (senha === '12345678' && CPF === '123456789') {
+                abrirNovaJanela();
+                return true; // Permitir que o formulário seja enviado
+            } else {
+                errorMessage.textContent = 'Senha ou CPF incorretos';
+                errorMessage.style.display = 'block';
+                return false; // Impedir o envio do formulário
+            }
+        }
+
+        function abrirNovaJanela() {
+            window.location.href = 'segunda.html';
+        }
+    </script>
+</body>
+</html>
